@@ -15,4 +15,8 @@ public class Review {
     @Id
     private ObjectId reviewId;
     private String body;
+
+    public Review(String body) {
+        this.body = body;
+    }
 }
