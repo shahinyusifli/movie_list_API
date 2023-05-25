@@ -3,6 +3,7 @@ package dev.shahin.movies.Services;
 import dev.shahin.movies.Entities.Movie;
 import dev.shahin.movies.Entities.Review;
 import dev.shahin.movies.Repositories.ReviewRepository;
+import dev.shahin.movies.Utilities.CheckReview;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -21,7 +22,8 @@ public class ReviewService {
     @Autowired
     private MongoTemplate mongoTemplate;
     public Review createReview(String body, String id) {
-        Review review = reviewRepository.insert(new Review(body));
+        CheckReview checkReview = new CheckReview(body);
+        Review review = reviewRepository.insert(new Review(checkReview.dumyDetectTestReview()));
 
         mongoTemplate.update(Movie.class)
                 .matching(Criteria.where("id").is(id))
