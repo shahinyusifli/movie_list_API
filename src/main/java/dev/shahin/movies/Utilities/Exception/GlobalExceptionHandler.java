@@ -1,37 +1,18 @@
-/*
-package dev.shahin.movies.Utilities.Exception;
-
-import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
-import jakarta.validation.ValidationException;
-import org.springframework.context.support.DefaultMessageSourceResolvable;
-import org.springframework.data.crossstore.ChangeSetPersister;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 
-@ControllerAdvice
-public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
+import java.util.HashMap;
+import java.util.Map;
 
-    @ExceptionHandler({MethodArgumentNotValidException.class})
-    protected ResponseEntity<ApplicationExceptionResponse> handleMethodArgumentNotValid(Exception ex) {
-        ApplicationExceptionResponse response=
-                ApplicationExceptionResponse.builder().message(ex.getMessage())
-                        .status(HttpStatus.BAD_REQUEST.value()).time(LocalDateTime.now()).build();
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST.value()).body(response);
+public class ValidationHandler {
+
+    public static ResponseEntity<Map<String, String>> handleValidationErrors(BindingResult bindingResult) {
+        Map<String, String> errors = new HashMap<>();
+        for (FieldError error : bindingResult.getFieldErrors()) {
+            errors.put(error.getField(), error.getDefaultMessage());
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
     }
-
-
-
-
-
-}*/
+}
