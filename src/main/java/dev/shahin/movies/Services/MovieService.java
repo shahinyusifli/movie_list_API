@@ -16,7 +16,7 @@ public class MovieService {
     private MovieRepository movieRepository;
 
     public List<Movie> getAllMovies() {
-        return movieRepository.findAll();
+        return movieRepository.findAllByFlagFalse();
     }
 
     public Optional<Movie> getSingleMovie(ObjectId id) { return movieRepository.findById(id); }
