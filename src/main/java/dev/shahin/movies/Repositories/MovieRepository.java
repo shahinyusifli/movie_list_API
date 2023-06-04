@@ -10,7 +10,6 @@ import java.util.List;
 
 @Repository
 public interface MovieRepository extends MongoRepository<Movie, ObjectId> {
-    //@Query("{'flag': false}")
-    @Query("{'flag': false}")
+    @Query("{'flag': false}, {'title': 1, 'releaseDate': 1}")
     List<Movie> findAllByFlagFalse();
 }

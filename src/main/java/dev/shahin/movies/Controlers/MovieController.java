@@ -2,6 +2,7 @@ package dev.shahin.movies.Controlers;
 
 
 import dev.shahin.movies.Entities.Movie;
+import dev.shahin.movies.Entities.MovieGetDTO;
 import dev.shahin.movies.Repositories.MovieRepository;
 import dev.shahin.movies.Services.MovieService;
 import org.bson.types.ObjectId;
@@ -23,8 +24,8 @@ public class MovieController {
     @Autowired
     private MovieService movieService;
     @GetMapping
-    public ResponseEntity<List<Movie>> getMovies() {
-        return new ResponseEntity<List<Movie>>(movieService.getAllMovies(), HttpStatus.OK);
+    public ResponseEntity<List<MovieGetDTO>> getMovies() {
+        return new ResponseEntity<List<MovieGetDTO>>(movieService.getAllMovies(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
