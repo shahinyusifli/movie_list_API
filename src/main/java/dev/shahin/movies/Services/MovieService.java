@@ -1,5 +1,6 @@
 package dev.shahin.movies.Services;
 
+import com.mongodb.client.result.UpdateResult;
 import dev.shahin.movies.Entities.Movie;
 import dev.shahin.movies.Entities.MovieGetDTO;
 import dev.shahin.movies.Repositories.MovieRepository;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,4 +36,12 @@ public class MovieService {
     }
 
     public Optional<Movie> getSingleMovie(ObjectId id) { return movieRepository.findById(id); }
+
+    public Long deleteMovie(ObjectId id) {
+        Query query = new Query().addCriteria(Criteria.where("id").is(id));
+        Update updateDefinition = new Update().set("flag", true);
+
+        UpdateResult updateResult = mongoTemplate.updateFirst(query, updateDefinition, Movie.class);
+        return updateResult.getMatchedCount();
+    }
 }
