@@ -2,6 +2,7 @@ package dev.shahin.movies.Controlers;
 
 
 import dev.shahin.movies.Entities.Movie;
+import dev.shahin.movies.Entities.MovieCreateDTO;
 import dev.shahin.movies.Entities.MovieGetDTO;
 import dev.shahin.movies.Repositories.MovieRepository;
 import dev.shahin.movies.Services.MovieService;
@@ -37,4 +38,10 @@ public class MovieController {
     public ResponseEntity<Long> deleteMovie(@PathVariable ObjectId id) {
         return new ResponseEntity<Long>(movieService.deleteMovie(id), HttpStatus.OK);
     }
+
+    @PostMapping("/create")
+    public ResponseEntity<Movie> createMovie(@RequestBody MovieCreateDTO payload){
+        return new ResponseEntity<Movie>(movieService.createMovie(payload), HttpStatus.CREATED);
+    }
+
 }
