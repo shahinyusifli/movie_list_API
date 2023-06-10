@@ -38,7 +38,8 @@ public class MovieService {
     public Optional<Movie> getSingleMovie(ObjectId id) { return movieRepository.findById(id); }
 
     public Long deleteMovie(ObjectId id) {
-        Query query = new Query().addCriteria(Criteria.where("id").is(id));
+        Query query = new Query();
+        query.addCriteria(Criteria.where("id").is(id));
         Update updateDefinition = new Update().set("flag", true);
 
         UpdateResult updateResult = mongoTemplate.updateFirst(query, updateDefinition, Movie.class);
