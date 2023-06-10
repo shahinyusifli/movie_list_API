@@ -2,7 +2,9 @@ package dev.shahin.movies.Services;
 
 import com.mongodb.client.result.UpdateResult;
 import dev.shahin.movies.Entities.Movie;
+import dev.shahin.movies.Entities.MovieCreateDTO;
 import dev.shahin.movies.Entities.MovieGetDTO;
+import dev.shahin.movies.Entities.Review;
 import dev.shahin.movies.Repositories.MovieRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,5 +47,22 @@ public class MovieService {
 
         UpdateResult updateResult = mongoTemplate.updateFirst(query, updateDefinition, Movie.class);
         return updateResult.getMatchedCount();
+    }
+
+    public Movie createMovie(MovieCreateDTO payload) {
+        Movie movie = new Movie();
+        List<String> emptyGenres = new ArrayList<>();
+        List<Review> emptyReviews = new ArrayList<>();
+        movie.setImdbId(payload.getImdbId());
+        movie.setTitle(payload.getTitle());
+        movie.setReleaseDate(payload.getReleaseDate());
+        movie.setTrailerLink(payload.getTrailerLink());
+        movie.setPoster(payload.getPoster());
+        movie.setGenres(payload.getGenres());
+        movie.setBackdrops(emptyGenres);
+        movie.setReviewIds(emptyReviews);
+        movie.setFlag(false); // Set flag to false
+        Movie savedMovie = movieRepository.insert(movie);
+        return savedMovie;
     }
 }
