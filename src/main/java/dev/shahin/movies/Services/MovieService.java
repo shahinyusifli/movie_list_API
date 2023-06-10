@@ -53,6 +53,7 @@ public class MovieService {
         Movie movie = new Movie();
         List<String> emptyGenres = new ArrayList<>();
         List<Review> emptyReviews = new ArrayList<>();
+
         movie.setImdbId(payload.getImdbId());
         movie.setTitle(payload.getTitle());
         movie.setReleaseDate(payload.getReleaseDate());
@@ -62,6 +63,11 @@ public class MovieService {
         movie.setBackdrops(emptyGenres);
         movie.setReviewIds(emptyReviews);
         movie.setFlag(false); // Set flag to false
+
+        if (movie.getImdbId() == null) {
+            movie.setImdbId("tt0000");
+        }
+
         Movie savedMovie = movieRepository.insert(movie);
         return savedMovie;
     }
