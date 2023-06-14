@@ -15,10 +15,7 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -56,13 +53,24 @@ public class MovieService {
     public Movie createMovie(MovieCreateDTO payload) {
 
         Movie movie = new Movie();
-        String unique_no = "12345";
 
-        Stream<String> streamOfGenres = payload.getGenres().stream();
-        String generatedImdbId = streamOfGenres
-                    .map(x -> String.valueOf(x.charAt(0)))
-                    .collect(Collectors.joining(""))
-                    .concat(unique_no);
+        Set<Integer> unique_no_list = new Random()
+                .ints(0, 9)
+                .distinct()
+                .limit(5)
+                .boxed()
+                .collect(Collectors.toSet());
+
+        String uniqueNumbers = unique_no_list
+                .stream()
+                .map(x -> String.valueOf(x))
+                .collect(Collectors.joining(""));
+
+        String generatedImdbId = payload.getGenres()
+                .stream()
+                .map(x -> String.valueOf(x.charAt(0)))
+                .collect(Collectors.joining(""))
+                .concat(uniqueNumbers);
 
         List<String> emptyGenres = new ArrayList<>();
         List<Review> emptyReviews = new ArrayList<>();
