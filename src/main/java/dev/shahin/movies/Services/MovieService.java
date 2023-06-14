@@ -14,9 +14,12 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
@@ -51,11 +54,20 @@ public class MovieService {
     }
 
     public Movie createMovie(MovieCreateDTO payload) {
+
         Movie movie = new Movie();
+        String unique_no = "12345";
+
+        Stream<String> streamOfGenres = payload.getGenres().stream();
+        String generatedImdbId = streamOfGenres
+                    .map(x -> String.valueOf(x.charAt(0)))
+                    .collect(Collectors.joining(""))
+                    .concat(unique_no);
+
         List<String> emptyGenres = new ArrayList<>();
         List<Review> emptyReviews = new ArrayList<>();
-        Stream<String> demo = payload.getGenres().stream();
-        movie.setImdbId(Optional.ofNullable(payload.getImdbId()).orElse("tt0000"));
+
+        movie.setImdbId(Optional.ofNullable(payload.getImdbId()).orElse(generatedImdbId));
         movie.setTitle(payload.getTitle());
         movie.setReleaseDate(payload.getReleaseDate());
         movie.setTrailerLink(payload.getTrailerLink());
