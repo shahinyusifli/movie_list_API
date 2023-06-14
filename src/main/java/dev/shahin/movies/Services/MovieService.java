@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 @Service
 public class MovieService {
@@ -53,8 +54,8 @@ public class MovieService {
         Movie movie = new Movie();
         List<String> emptyGenres = new ArrayList<>();
         List<Review> emptyReviews = new ArrayList<>();
-
-        movie.setImdbId(payload.getImdbId());
+        Stream<String> demo = payload.getGenres().stream();
+        movie.setImdbId(Optional.ofNullable(payload.getImdbId()).orElse("tt0000"));
         movie.setTitle(payload.getTitle());
         movie.setReleaseDate(payload.getReleaseDate());
         movie.setTrailerLink(payload.getTrailerLink());
@@ -63,10 +64,6 @@ public class MovieService {
         movie.setBackdrops(emptyGenres);
         movie.setReviewIds(emptyReviews);
         movie.setFlag(false); // Set flag to false
-
-        if (movie.getImdbId() == null) {
-            movie.setImdbId("tt0000");
-        }
 
         Movie savedMovie = movieRepository.insert(movie);
         return savedMovie;
