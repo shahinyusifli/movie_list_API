@@ -61,16 +61,18 @@ public class MovieService {
                 .boxed()
                 .collect(Collectors.toSet());
 
-        String uniqueNumbers = unique_no_list
+        String generatedNumbersOfImdbId = unique_no_list
                 .stream()
                 .map(x -> String.valueOf(x))
                 .collect(Collectors.joining(""));
 
-        String generatedImdbId = payload.getGenres()
-                .stream()
+        String generatedLettersOfID = payload.getGenres() != null
+                ? payload.getGenres().stream()
                 .map(x -> String.valueOf(x.charAt(0)))
                 .collect(Collectors.joining(""))
-                .concat(uniqueNumbers);
+                : "oth";
+
+        String generatedImdbId = generatedLettersOfID.concat(generatedNumbersOfImdbId);
 
         List<String> emptyGenres = new ArrayList<>();
         List<Review> emptyReviews = new ArrayList<>();
