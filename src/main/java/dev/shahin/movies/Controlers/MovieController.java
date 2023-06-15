@@ -34,7 +34,7 @@ public class MovieController {
         return new ResponseEntity<Optional<Movie>>(movieService.getSingleMovie(id), HttpStatus.OK);
     }
 
-    @GetMapping("/delete/{id}")
+    @PostMapping("/delete/{id}")
     public ResponseEntity<Long> deleteMovie(@PathVariable ObjectId id) {
         return new ResponseEntity<Long>(movieService.deleteMovie(id), HttpStatus.OK);
     }
