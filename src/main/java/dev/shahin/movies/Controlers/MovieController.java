@@ -4,6 +4,7 @@ package dev.shahin.movies.Controlers;
 import dev.shahin.movies.Entities.Movie;
 import dev.shahin.movies.Entities.MovieCreateDTO;
 import dev.shahin.movies.Entities.MovieGetDTO;
+import dev.shahin.movies.Entities.MovieSingleDTO;
 import dev.shahin.movies.Repositories.MovieRepository;
 import dev.shahin.movies.Services.MovieService;
 import org.bson.types.ObjectId;
@@ -30,8 +31,13 @@ public class MovieController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Movie>> getSingleMovie(@PathVariable ObjectId id) {
-        return new ResponseEntity<Optional<Movie>>(movieService.getSingleMovie(id), HttpStatus.OK);
+    public ResponseEntity<MovieSingleDTO> getSingleMovie(@PathVariable ObjectId id) {
+        MovieSingleDTO movieSingleDTO = movieService.getSingleMovie(id);
+        if (movieSingleDTO != null) {
+            return new ResponseEntity<>(movieSingleDTO, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping("/delete/{id}")
