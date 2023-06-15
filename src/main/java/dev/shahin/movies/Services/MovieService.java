@@ -1,10 +1,8 @@
 package dev.shahin.movies.Services;
 
 import com.mongodb.client.result.UpdateResult;
-import dev.shahin.movies.Entities.Movie;
-import dev.shahin.movies.Entities.MovieCreateDTO;
-import dev.shahin.movies.Entities.MovieGetDTO;
-import dev.shahin.movies.Entities.Review;
+import dev.shahin.movies.Entities.*;
+import dev.shahin.movies.MoviesApplication;
 import dev.shahin.movies.Repositories.MovieRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +12,8 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
-import java.math.BigInteger;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class MovieService {
@@ -39,7 +35,30 @@ public class MovieService {
         return mongoTemplate.find(query, MovieGetDTO.class);
     }
 
-    public Optional<Movie> getSingleMovie(ObjectId id) { return movieRepository.findById(id); }
+    public MovieSingleDTO getSingleMovie(ObjectId id) {
+        Query query =new Query();
+        query.addCriteria(Criteria.where("id").is(id));
+        query.addCriteria(Criteria.where("flag").is(false));
+        query.fields()
+                .include("title")
+                .include("releaseDate")
+                .include("reviewIds");
+
+        List<Movie> movies = mongoTemplate.find(query, Movie.class);
+        Movie movie = movies.get(0);
+        List<Review> reviewIds = movie.getReviewIds();
+
+        MovieSingleDTO movieSingleDTO = MovieSingleDTO
+                .builder()
+                .title(movie.getTitle())
+                .releaseDate(movie.getReleaseDate())
+                .totalNumOfReviews(reviewIds
+                        .stream()
+                        .count()
+                ).build();
+        return movieSingleDTO;
+    }
+
 
     public Long deleteMovie(ObjectId id) {
         Query query = new Query();
