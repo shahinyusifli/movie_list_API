@@ -10,7 +10,7 @@ A web API that lists and gives options to users to add and modify movies and the
    - In the event that no genres have been assigned to the movie, the alphabetic portion of the ID should include the letter "oth"
 2.	Movie can be deleted or hidden from users if they do not have reviews.
 3.	Movie can be seen with title, the last updated date and number of total reviews inside it.
-4.	Movies can be seen with titles, one example photos, genres, and release dates.
+4.	Movies can be seen with titles, one example photos, genres, reviews and release dates.
 - If there are not any users reviews, it should return “We do not have any current review”
 
 #### Review
