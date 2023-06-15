@@ -44,8 +44,8 @@ public class MovieService {
     public Long deleteMovie(ObjectId id) {
         Query query = new Query();
         query.addCriteria(Criteria.where("id").is(id));
+        query.addCriteria(Criteria.where("reviewIds").size(0));
         Update updateDefinition = new Update().set("flag", true);
-
         UpdateResult updateResult = mongoTemplate.updateFirst(query, updateDefinition, Movie.class);
         return updateResult.getMatchedCount();
     }
