@@ -9,7 +9,7 @@ A web API that lists and gives options to users to add and modify movies and the
    - If the creator has not provided an IMDb ID, it should be substituted with a generated ID. The generated ID should begin with one or more letters, which are derived from the genres associated with the created movie. Each letter signifying a genre should be the first letter of that particular genre. The numeric portion of the ID should consist of five unique digits, generated specifically for this purpose.
    - In the event that no genres have been assigned to the movie, the alphabetic portion of the ID should include the letter "oth"
 2.	Movie can be deleted or hidden from users if they do not have reviews.
-3.	Movie can be seen with the last updated date and number of total reviews inside it.
+3.	Movie can be seen with title, the last updated date and number of total reviews inside it.
 4.	Movies can be seen with titles, one example photos, genres, and release dates.
 - If there are not any users reviews, it should return “We do not have any current review”
 
