@@ -59,6 +59,20 @@ public class MovieService {
         return movieSingleDTO;
     }
 
+    public MovieWithReviewsDTO getMoviesWithReviews() {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("flag").is(false));
+        query.fields()
+                .include("title")
+                .include("poster")
+                .include("genres")
+                .include("reviews")
+                .include("releaseDate");
+
+        List<Movie> movies = mongoTemplate.find(query, Movie.class);
+
+        return movies.get();
+    }
 
     public Long deleteMovie(ObjectId id) {
         Query query = new Query();
