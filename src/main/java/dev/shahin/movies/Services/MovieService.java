@@ -71,7 +71,7 @@ public class MovieService {
 
         List<Movie> movies = mongoTemplate.find(query, Movie.class);
 
-        return movies.get();
+        return (MovieWithReviewsDTO) movies;
     }
 
     public Long deleteMovie(ObjectId id) {
