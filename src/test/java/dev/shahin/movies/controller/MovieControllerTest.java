@@ -1,6 +1,5 @@
 package dev.shahin.movies.controller;
 
-import dev.shahin.movies.controller.MovieController;
 import dev.shahin.movies.entity.Movie;
 import dev.shahin.movies.entity.MovieCreateDTO;
 import dev.shahin.movies.entity.MovieGetDTO;

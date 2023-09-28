@@ -20,4 +20,7 @@ public class Review {
     public Review(String body) {
         this.body = body;
     }
+
+    public void setId(long l) {
+    }
 }
