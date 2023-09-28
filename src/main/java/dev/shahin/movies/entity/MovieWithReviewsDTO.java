@@ -1,19 +1,20 @@
-package dev.shahin.movies.Entities;
+package dev.shahin.movies.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.bson.types.ObjectId;
 
 import java.util.List;
 
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class MovieSingleDTO {
+@AllArgsConstructor
+public class MovieWithReviewsDTO {
     private String title;
+    private  String poster;
+    private List<String> genres;
+    private List<String> reviews;
     private String releaseDate;
-    private long totalNumOfReviews;
 }

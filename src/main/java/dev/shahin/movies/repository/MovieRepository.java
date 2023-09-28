@@ -1,6 +1,6 @@
-package dev.shahin.movies.Repositories;
+package dev.shahin.movies.repository;
 
-import dev.shahin.movies.Entities.Movie;
+import dev.shahin.movies.entity.Movie;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;

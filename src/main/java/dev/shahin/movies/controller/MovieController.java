@@ -1,12 +1,11 @@
-package dev.shahin.movies.Controlers;
+package dev.shahin.movies.controller;
 
 
-import dev.shahin.movies.Entities.Movie;
-import dev.shahin.movies.Entities.MovieCreateDTO;
-import dev.shahin.movies.Entities.MovieGetDTO;
-import dev.shahin.movies.Entities.MovieSingleDTO;
-import dev.shahin.movies.Repositories.MovieRepository;
-import dev.shahin.movies.Services.MovieService;
+import dev.shahin.movies.entity.Movie;
+import dev.shahin.movies.entity.MovieCreateDTO;
+import dev.shahin.movies.entity.MovieGetDTO;
+import dev.shahin.movies.entity.MovieSingleDTO;
+import dev.shahin.movies.service.MovieService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @RestController

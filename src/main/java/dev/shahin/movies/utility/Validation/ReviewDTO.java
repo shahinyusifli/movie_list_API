@@ -1,4 +1,4 @@
-package dev.shahin.movies.Utilities.Validation;
+package dev.shahin.movies.utility.Validation;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;

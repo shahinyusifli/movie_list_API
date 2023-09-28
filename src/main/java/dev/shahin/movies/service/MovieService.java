@@ -1,9 +1,8 @@
-package dev.shahin.movies.Services;
+package dev.shahin.movies.service;
 
 import com.mongodb.client.result.UpdateResult;
-import dev.shahin.movies.Entities.*;
-import dev.shahin.movies.MoviesApplication;
-import dev.shahin.movies.Repositories.MovieRepository;
+import dev.shahin.movies.entity.*;
+import dev.shahin.movies.repository.MovieRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;

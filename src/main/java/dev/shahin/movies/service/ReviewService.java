@@ -1,17 +1,14 @@
-package dev.shahin.movies.Services;
+package dev.shahin.movies.service;
 
-import dev.shahin.movies.Entities.Movie;
-import dev.shahin.movies.Entities.Review;
-import dev.shahin.movies.Repositories.ReviewRepository;
-import dev.shahin.movies.Utilities.CheckReview;
-import org.bson.types.ObjectId;
+import dev.shahin.movies.entity.Movie;
+import dev.shahin.movies.entity.Review;
+import dev.shahin.movies.repository.ReviewRepository;
+import dev.shahin.movies.utility.CheckReview;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 
 @Service
 public class ReviewService {

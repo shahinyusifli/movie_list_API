@@ -1,10 +1,8 @@
-package dev.shahin.movies.Controlers;
+package dev.shahin.movies.controller;
 
-import dev.shahin.movies.Entities.Movie;
-import dev.shahin.movies.Entities.Review;
-import dev.shahin.movies.Services.ReviewService;
-import dev.shahin.movies.Utilities.Validation.ReviewDTO;
-import org.bson.types.ObjectId;
+import dev.shahin.movies.entity.Review;
+import dev.shahin.movies.service.ReviewService;
+import dev.shahin.movies.utility.Validation.ReviewDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,8 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Map;
 
 @RestController
 @RequestMapping("/review/create")

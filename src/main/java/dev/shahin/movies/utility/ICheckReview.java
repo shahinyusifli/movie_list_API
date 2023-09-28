@@ -1,4 +1,4 @@
-package dev.shahin.movies.Utilities;
+package dev.shahin.movies.utility;
 
 public interface ICheckReview {
     String dumyDetectTestReview();

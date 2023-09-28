@@ -1,4 +1,4 @@
-package dev.shahin.movies.Entities;
+package dev.shahin.movies.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
